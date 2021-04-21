@@ -1,37 +1,47 @@
-## Welcome to GitHub Pages
+<?php
+/**
+ * The template for displaying home page.
+ *
+ * This is the template that displays all pages by default.
+ * Please note that this is the WordPress construct of pages
+ * and that other 'pages' on your WordPress site will use a
+ * different template.
+ *
+ * @package Car Fix Lite
+ */
 
-You can use the [editor on GitHub](https://github.com/salvascarcenter/salvascarcenter/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
-
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
-
-### Markdown
-
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
-
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/salvascarcenter/salvascarcenter/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+get_header(); 
+?>
+<div class="container">
+     <div class="page_content_builder">
+        <section class="content_align_box">
+        	 <div class="defaultpost_lyout">
+					<?php
+                    if ( have_posts() ) :
+                        // Start the Loop.
+                        while ( have_posts() ) : the_post();
+                            /*
+                             * Include the post format-specific template for the content. If you want to
+                             * use this in a child theme, then include a file called called content-___.php
+                             * (where ___ is the post format) and that will be used instead.
+                             */
+                            get_template_part( 'content' );
+                    
+                        endwhile;						
+                        // Previous/next post navigation.
+                        the_posts_pagination();
+                    
+                    else :
+                        // If no content, include the "No posts found" template.
+                         get_template_part( 'no-results' );
+                    
+                    endif;
+                    ?>
+              </div><!-- defaultpost_lyout -->
+                   
+             </section>
+           <?php get_sidebar();?>        	
+        <div class="clear"></div>
+    </div><!-- site-aligner -->
+</div><!-- content -->
+<?php get_footer(); ?>
